@@ -60,7 +60,6 @@ kubectl config use-context docker-desktop
 kubectl config set-context $(kubectl config current-context) --namespace=my-namespace
 ```
 
-To switch between contexts, you can also install and use [kubectx](https://github.com/ahmetb/kubectx).
 
 ## Get Commands
 
