@@ -70,8 +70,8 @@ kubectl get configmaps
 kubectl get nodes
 kubectl get pods
 kubectl get rs
-kubectl get svc kuard
-kubectl get endpoints kuard
+kubectl get svc 
+kubectl get endpoints <svcname>
 ```
 
 Additional switches that can be added to the above commands:
@@ -89,7 +89,6 @@ You can set the default namespace for the current context like so:
 kubectl config set-context $(kubectl config current-context) --namespace=my-namespace
 ```
 
-To switch namespaces, you can also install and use [kubens](https://github.com/ahmetb/kubectx/blob/master/kubens).
 
 ## Labels
 
@@ -110,8 +109,8 @@ kubectl get pods -l 'environment in (production,test),tier notin (frontend,backe
 kubectl describe nodes [id]
 kubectl describe pods [id]
 kubectl describe rs [id]
-kubectl describe svc kuard [id]
-kubectl describe endpoints kuard [id]
+kubectl describe svc  [id]
+kubectl describe endpoints <svcname> [id]
 ```
 
 ## Delete Command
@@ -120,8 +119,8 @@ kubectl describe endpoints kuard [id]
 kubectl delete nodes [id]
 kubectl delete pods [id]
 kubectl delete rs [id]
-kubectl delete svc kuard [id]
-kubectl delete endpoints kuard [id]
+kubectl delete svc  [id]
+kubectl delete endpoints <svcname> [id]
 ```
 
 Force a deletion of a pod without waiting for it to gracefully shut down
@@ -139,15 +138,15 @@ kubectl delete pod-name --grace-period=0 --force
 ## Create Pod
 
 ```
-kubectl run kuard --generator=run-pod/v1 --image=gcr.io/kuar-demo/kuard-amd64:1 --output yaml --export --dry-run > kuard-pod.yml
-kubectl apply -f kuard-pod.yml
+kubectl run <name> --generator=run-pod/v1 --image=<imagename:tag> --output yaml --export --dry-run > <name>.yml
+kubectl apply -f <name>.yml
 ```
 
 ## Create Deployment
 
 ```
-kubectl run kuard --image=gcr.io/kuar-demo/kuard-amd64:1 --output yaml --export --dry-run > kuard-deployment.yml
-kubectl apply -f kuard-deployment.yml
+kubectl run <name> --image=<imagename:tag> --output yaml --export --dry-run > deployment.yml
+kubectl apply -f deployment.yml
 ```
 
 ## Create Service
@@ -191,7 +190,6 @@ kubectl attach POD_NAME
 kubectl cp POD_NAME:/var/log .
 ```
 
-You can also install and use [kail](https://github.com/boz/kail).
 
 ## Port Forward
 
@@ -299,7 +297,6 @@ kubectl proxy
 
 # Azure Kubernetes Service
 
-[List of az aks commands](https://docs.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest)
 
 ## Get Credentials
 ```
@@ -308,7 +305,6 @@ az aks get-credentials --resource-group <Resource Group Name> --name <AKS Name>
 
 ## Show Dashboard
 
-Secure the dashboard like [this](http://blog.cowger.us/2018/07/03/a-read-only-kubernetes-dashboard.html). Then run:
 ```
 az aks browse --resource-group <Resource Group Name> --name <AKS Name>
 ```
